@@ -1,31 +1,34 @@
 import falcon
 
-from src.falcon_utils.auth import authorization
-from src.falcon_utils.auth import user
+from src.falcon_utils.auth import Auth, AuthConfig
+
+config_dict = {
+    "schemes": [1, 2, 3, 4],
+    "api_keys": {"api-key-value": "api-key-client"},
+    "headers": {4: ["X-API-KEY"]},
+    "authorization_model": "/tmp/casbin_model.conf",
+    "authorization_policy": "/tmp/casbin_policy.json",
+}
 
 
-authorization.init()
+auth = Auth(AuthConfig(**config_dict))
 
 app = falcon.App()
-
-
-def add_user(req, resp, *args, **kwargs):
-    req.context.user = user.User(
-        ref=req.headers.get("X-USER"), domain=req.headers.get("X-HOST")
-    )
+app.add_middleware(auth.middleware)
 
 
 class ObjectRoute:
 
-    @falcon.before(add_user)
-    @falcon.before(authorization.authorize())
+    @falcon.before(auth.authenticate())
+    @falcon.before(auth.authorize())
     def on_get(self, req, resp, *args, **kwargs):
         resp.media = {"status": "ok"}
 
+
 class ObjectRoute2:
 
-    @falcon.before(add_user)
-    @falcon.before(authorization.authorize())
+    @falcon.before(auth.authenticate(auth=False))
+    @falcon.before(auth.authorize())
     def on_get(self, req, resp, *args, **kwargs):
         resp.media = {"status": "ok"}
 

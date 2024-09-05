@@ -20,3 +20,9 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+
+[tool.pytest.ini_options]
+addopts = "-rSA"
+testpaths = [
+  "tests"
+]

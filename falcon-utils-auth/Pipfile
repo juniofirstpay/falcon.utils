@@ -11,6 +11,7 @@ ipython = "*"
 falcon = "*"
 pytest = "*"
 black = "*"
+build = "*"
 
 [requires]
 python_version = "3.9"
