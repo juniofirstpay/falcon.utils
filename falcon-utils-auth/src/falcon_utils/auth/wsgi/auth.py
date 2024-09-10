@@ -28,11 +28,12 @@ class Auth:
 
     def __init__(self, config: AuthConfig):
         self._config = config
-        self._enforcer = create_enforcer(
-            self._config.authorization_model, 
-            self._config.authorization_policy,
-            True
-        )
+        if self._config.authorization_model and self._config.authorization_policy:
+            self._enforcer = create_enforcer(
+                self._config.authorization_model, 
+                self._config.authorization_policy,
+                True
+            )
 
         if AuthSchemes.JWT in self._config.schemes:
             self._jwt_auth = JWTAuth(url=self._config.jwks[0], headers=self._config.jwks[1])

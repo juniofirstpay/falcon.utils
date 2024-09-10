@@ -19,6 +19,7 @@ src/falcon_utils/auth/wsgi/middleware.py
 src/falcon_utils_auth.egg-info/PKG-INFO
 src/falcon_utils_auth.egg-info/SOURCES.txt
 src/falcon_utils_auth.egg-info/dependency_links.txt
+src/falcon_utils_auth.egg-info/requires.txt
 src/falcon_utils_auth.egg-info/top_level.txt
 tests/test_authentication.py
 tests/test_authorization.py

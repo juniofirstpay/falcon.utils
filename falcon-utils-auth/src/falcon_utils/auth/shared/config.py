@@ -10,6 +10,6 @@ class AuthConfig:
     schemes: List[AuthSchemes]  # list of enabled schemes
     api_keys: Dict[str, str]
     headers: Dict[AuthSchemes, List[str]]
-    authorization_model: str
-    authorization_policy: str
+    authorization_model: str = None
+    authorization_policy: str = None
     jwks: List[Union[str, Dict]] = None

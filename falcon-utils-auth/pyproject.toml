@@ -8,7 +8,7 @@ include = ["falcon_utils.auth", "falcon_utils.auth.asgi", "falcon_utils.auth.wsg
 
 [project]
 name = "falcon-utils-auth"
-version = "0.0.4"
+version = "0.0.7"
 authors = [
   { name="Nirbhay Gupta", email="nirbhay.gupta@junio.in" },
 ]
@@ -20,14 +20,15 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dependencies=[
+  "casbin >= 1.36.3",
+  "cryptography ~= 43.0",
+  "pyjwt ~= 2.9"
+]
+
 
 [tool.pytest.ini_options]
 addopts = "-rSA"
 testpaths = [
   "tests"
-]
-dependencies=[
-  "casbin >= 1.36.3",
-  "cryptography ~= 43.0",
-  "pyjwt ~= 2.9"
 ]
