@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src/"]
-include = ["falcon_utils.auth"]
+include = ["falcon_utils.auth", "falcon_utils.auth.asgi", "falcon_utils.auth.wsgi", "falcon_utils.auth.shared", "falcon_utils.auth.casbin"]
 
 [project]
 name = "falcon-utils-auth"
-version = "0.0.3"
+version = "0.0.4"
 authors = [
   { name="Nirbhay Gupta", email="nirbhay.gupta@junio.in" },
 ]
