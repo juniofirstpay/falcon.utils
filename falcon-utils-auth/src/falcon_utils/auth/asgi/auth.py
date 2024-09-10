@@ -100,7 +100,10 @@ class Auth:
 
         if len(self._config.schemes) == 0:
             return True  # by default anonymous schemes are enabled
-
+        
+        if context.credentials is None:
+            return False
+        
         try:
             if context.credentials.type == AuthSchemes.API_KEY:
                 await self._authenticate_with_api_key(req, context)
