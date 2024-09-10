@@ -27,8 +27,9 @@ class Middleware:
             return
 
     async def process_resource(self, req: Request, resp: Response, resource, params):
-        if hasattr(resource, "_auth", False):
-            await self.verify(req, resp, resource._auth)
+        # if hasattr(resource, "_auth", False):
+        #     await self.verify(req, resp, resource._auth)
+        pass
 
     async def process_response(
         self, req: Request, resp: Response, resource, req_succeeded: bool
