@@ -3,4 +3,4 @@ from .asgi.auth import Auth as AsyncAuth
 from .shared.config import AuthConfig
 
 
-__all__ = ("Auth", "AsyncAuth")
+__all__ = ("Auth", "AsyncAuth", "AuthConfig",)
