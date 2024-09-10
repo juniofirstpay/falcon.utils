@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 casbin = "*"
+pyjwt = "*"
+cryptography = "*"
 
 [dev-packages]
 ipython = "*"
