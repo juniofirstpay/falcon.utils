@@ -6,6 +6,7 @@ from ..shared.config import AuthConfig
 from ..shared.context import RequestAuthContext
 from ..shared.user import Anonymous, User
 from ..shared.constants import AuthSchemes, UserType
+from ..shared.jwt import JWTAuth
 from ..utils import get_domain
 from ..casbin import create_enforcer
 from .middleware import Middleware
@@ -20,9 +21,14 @@ class Auth:
 
     def __init__(self, config: AuthConfig):
         self._config = config
-        self._enforcer = create_enforcer(
-            self._config.authorization_model, self._config.authorization_policy
-        )
+        
+        if self._config.authorization_model and self._config.authorization_policy:
+            self._enforcer = create_enforcer(
+                self._config.authorization_model, self._config.authorization_policy
+            )
+
+        if AuthSchemes.JWT in self._config.schemes:
+            self._jwt_auth = JWTAuth(url=self._config.jwks[0], headers=self._config.jwks[1], is_async=True)
 
     @property
     def middleware(self):
@@ -65,7 +71,16 @@ class Auth:
         pass
 
     async def _authenticate_with_jwt(self, req, Request, context: RequestAuthContext):
-        pass
+        payload = await self._jwt_auth.validate(context.credentials.value)
+        context.user = User(
+            authenticated=True,
+            type=UserType.service,
+            ref=payload["user_id"],
+            domain=context.user.domain,
+            extras={
+                **payload
+            },
+        )
 
     async def validate(self, req: Request):
         context = self._context(req)

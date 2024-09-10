@@ -7,15 +7,22 @@ from ..shared.config import AuthConfig
 from ..shared.context import RequestAuthContext, Credentials
 from ..shared.user import Anonymous, User
 from ..shared.constants import AuthSchemes, UserType
+from ..shared.jwt import JWTAuth
 from ..utils import get_domain
 from ..casbin import create_enforcer
 from .middleware import Middleware
+
 
 Request = TypeVar("Request", falcon.Request, falcon.asgi.Request)
 Response = TypeVar("Response", falcon.Response, falcon.asgi.Response)
 
 ERR_CREDENTIALS_INVALID = "invalid credentials"
 
+
+
+        
+            
+        
 
 class Auth:
 
@@ -26,6 +33,9 @@ class Auth:
             self._config.authorization_policy,
             True
         )
+
+        if AuthSchemes.JWT in self._config.schemes:
+            self._jwt_auth = JWTAuth(url=self._config.jwks[0], headers=self._config.jwks[1])
 
     @property
     def middleware(self):
@@ -78,11 +88,23 @@ class Auth:
     def _authenticate_with_oauth(self, req, Request, context: RequestAuthContext):
         pass
 
-    def _authenticate_with_jwt(self, req, Request, context: RequestAuthContext):
-        pass
+    def _authenticate_with_jwt(self, req: Request, context: RequestAuthContext):
+        payload = self._jwt_auth.validate(context.credentials.value)
+        context.user = User(
+            authenticated=True,
+            type=UserType.service,
+            ref=payload["user_id"],
+            domain=context.user.domain,
+            extras={
+                **payload
+            },
+        )
+
 
     def validate(self, req: Request):
         context = self._context(req)
+
+        print("context", context)
 
         if len(self._config.schemes) == 0:
             return True  # by default anonymous schemes are enabled
@@ -96,6 +118,7 @@ class Auth:
             elif context.credentials.type == AuthSchemes.TOKEN:
                 self._authenticate_with_oauth(req, context)
             elif context.credentials.type == AuthSchemes.JWT:
+                print(req, context)
                 self._authenticate_with_jwt(req, context)
         except Exception as e:
             if str(e) == ERR_CREDENTIALS_INVALID:

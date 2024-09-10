@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List, Dict, Union
 from dataclasses import dataclass
 from .constants import AuthSchemes
 
@@ -12,3 +12,4 @@ class AuthConfig:
     headers: Dict[AuthSchemes, List[str]]
     authorization_model: str
     authorization_policy: str
+    jwks: List[Union[str, Dict]] = None
