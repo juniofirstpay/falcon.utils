@@ -116,12 +116,10 @@ class Auth:
 
         return True
 
-    async def verify(self, req: Request, resp: Response, auth: bool):
+    async def verify(self, req: Request, auth: bool):
         context = self._context(req)
 
         if auth == True and isinstance(context.user, Anonymous):
-            resp.status = falcon.HTTP_401
-            resp.complete = True
             return False
 
         return True
