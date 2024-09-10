@@ -3,7 +3,7 @@ import falcon.asgi
 
 from typing import TypeVar
 from ..shared.config import AuthConfig
-from ..shared.context import RequestAuthContext
+from ..shared.context import RequestAuthContext, Credentials
 from ..shared.user import Anonymous, User
 from ..shared.constants import AuthSchemes, UserType
 from ..shared.jwt import JWTAuth
@@ -35,6 +35,19 @@ class Auth:
         return Middleware(self, self._config)
 
     async def _check_conflict(self, req: Request):
+        context = req.context.auth
+
+        for scheme in self._config.schemes:
+            header_names = self._config.headers.get(scheme) or []
+            for header_name in header_names:
+                credential_value = req.get_header(header_name, None)
+                if credential_value:
+                    if context.credentials:
+                        return True
+                    context.credentials = Credentials(
+                        AuthSchemes(scheme), credential_value
+                    )
+
         return False
 
     def prepare(self, req: Request):
