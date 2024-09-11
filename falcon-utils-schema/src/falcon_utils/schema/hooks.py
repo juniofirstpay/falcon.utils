@@ -2,9 +2,9 @@ from typing import Callable, Union
 from marshmallow import Schema
 from marshmallow_dataclass import dataclass
 
-__all__ = ("validate", "map_query")
+__all__ = ("map_data", "map_query")
 
-def validate(schema: Union[Schema]) -> Callable:
+def map_data(schema: Union[Schema]) -> Callable:
     def hook(req, resp, resource, params):
         if hasattr(schema, 'Schema', False):
             # provided schema is a marshmallow dataclass

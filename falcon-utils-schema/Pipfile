@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-marshmallow-dataclass = "*"
+marshmallow-dataclass = "==8.7.0"
 
 [dev-packages]
 
