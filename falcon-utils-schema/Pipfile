@@ -7,6 +7,7 @@ name = "pypi"
 marshmallow-dataclass = "==8.7.0"
 
 [dev-packages]
+build = "*"
 
 [requires]
 python_version = "3.11"

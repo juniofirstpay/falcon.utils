@@ -1,0 +1,8 @@
+pyproject.toml
+src/falcon_utils/schema/__init__.py
+src/falcon_utils/schema/hooks.py
+src/falcon_utils_schema.egg-info/PKG-INFO
+src/falcon_utils_schema.egg-info/SOURCES.txt
+src/falcon_utils_schema.egg-info/dependency_links.txt
+src/falcon_utils_schema.egg-info/requires.txt
+src/falcon_utils_schema.egg-info/top_level.txt
