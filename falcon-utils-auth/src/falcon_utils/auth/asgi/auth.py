@@ -43,7 +43,7 @@ class Auth:
         context = req.context.auth
 
         for scheme in self._config.schemes:
-            header_names = self._config.headers.get(scheme) or []
+            header_names = self._config.headers.get(str(scheme)) or []
             logger.error(f"HEADERS: {req.headers}")
             logger.error(f"HEADERS: {header_names}")
             for header_name in header_names:
