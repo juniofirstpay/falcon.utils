@@ -135,7 +135,7 @@ class Auth:
     def authenticate(self, auth=True):
         async def wrapped_hook(req: "falcon.Request", resp: "falcon.Response", *args):
             verified = await self.verify(req, auth)
-            logger.info("REJECTED FROM HOOK")
+            logger.error("REJECTED FROM HOOK")
             if not verified:
                 resp.status = falcon.HTTP_401
                 resp.complete = True
