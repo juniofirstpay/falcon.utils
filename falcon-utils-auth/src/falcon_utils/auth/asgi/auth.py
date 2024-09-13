@@ -44,6 +44,8 @@ class Auth:
 
         for scheme in self._config.schemes:
             header_names = self._config.headers.get(scheme) or []
+            logger.error(f"HEADERS: {req.headers}")
+            logger.error(f"HEADERS: {header_names}")
             for header_name in header_names:
                 credential_value = req.get_header(header_name, None)
                 if credential_value:
