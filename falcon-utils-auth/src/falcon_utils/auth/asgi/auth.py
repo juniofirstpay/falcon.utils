@@ -102,7 +102,7 @@ class Auth:
             return True  # by default anonymous schemes are enabled
         
         if context.credentials is None:
-            return False
+            return True
         
         try:
             if context.credentials.type == AuthSchemes.API_KEY:
@@ -133,6 +133,7 @@ class Auth:
             if not verified:
                 resp.status = falcon.HTTP_401
                 resp.complete = True
+                raise falcon.HTTPError(falcon.HTTP_401)
 
         return wrapped_hook
 

@@ -12,6 +12,7 @@ src/falcon_utils/auth/shared/config.py
 src/falcon_utils/auth/shared/constants.py
 src/falcon_utils/auth/shared/context.py
 src/falcon_utils/auth/shared/jwt.py
+src/falcon_utils/auth/shared/oauth.py
 src/falcon_utils/auth/shared/user.py
 src/falcon_utils/auth/wsgi/__init__.py
 src/falcon_utils/auth/wsgi/auth.py
