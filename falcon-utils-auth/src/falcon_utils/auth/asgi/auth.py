@@ -126,7 +126,8 @@ class Auth:
 
     async def verify(self, req: Request, auth: bool):
         context = self._context(req)
-
+        logger.error(context)
+        
         if auth == True and isinstance(context.user, Anonymous):
             return False
 
