@@ -1,7 +1,11 @@
 import falcon
 from falcon.asgi import Request, Response
 from ..shared.config import AuthConfig
+import logging
 
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 class Middleware:
 
@@ -21,6 +25,9 @@ class Middleware:
             return
 
         authenticated = await self._auth.validate(req)
+        
+        logger.info(f"AUTHENTICATED: {authenticated}")
+        
         if authenticated == False:
             resp.status = falcon.HTTP_401
             resp.complete = True

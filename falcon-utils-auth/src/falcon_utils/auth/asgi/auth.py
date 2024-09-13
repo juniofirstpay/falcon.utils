@@ -10,6 +10,11 @@ from ..shared.jwt import JWTAuth
 from ..utils import get_domain
 from ..casbin import create_enforcer
 from .middleware import Middleware
+import logging
+
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 Request = TypeVar("Request", falcon.Request, falcon.asgi.Request)
 Response = TypeVar("Response", falcon.Response, falcon.asgi.Response)
@@ -130,6 +135,7 @@ class Auth:
     def authenticate(self, auth=True):
         async def wrapped_hook(req: "falcon.Request", resp: "falcon.Response", *args):
             verified = await self.verify(req, auth)
+            logger.info("REJECTED FROM HOOK")
             if not verified:
                 resp.status = falcon.HTTP_401
                 resp.complete = True
