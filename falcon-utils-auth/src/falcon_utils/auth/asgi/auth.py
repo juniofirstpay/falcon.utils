@@ -87,10 +87,10 @@ class Auth:
             extras={},
         )
 
-    async def _authenticate_with_oauth(self, req, Request, context: RequestAuthContext):
+    async def _authenticate_with_oauth(self, req: Request, context: RequestAuthContext):
         pass
 
-    async def _authenticate_with_jwt(self, req, Request, context: RequestAuthContext):
+    async def _authenticate_with_jwt(self, req: Request, context: RequestAuthContext):
         payload = await self._jwt_auth.validate(context.credentials.value)
         context.user = User(
             authenticated=True,
