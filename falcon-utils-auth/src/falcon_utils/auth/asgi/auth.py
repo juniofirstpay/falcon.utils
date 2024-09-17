@@ -91,7 +91,7 @@ class Auth:
         pass
 
     async def _authenticate_with_jwt(self, req: Request, context: RequestAuthContext):
-        payload = await self._jwt_auth.validate(context.credentials.value)
+        payload = self._jwt_auth.validate(context.credentials.value)
         context.user = User(
             authenticated=True,
             type=UserType.service,
