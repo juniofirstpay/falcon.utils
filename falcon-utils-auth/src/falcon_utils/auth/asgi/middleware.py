@@ -25,9 +25,7 @@ class Middleware:
             return
 
         authenticated = await self._auth.validate(req)
-        
-        logger.error(f"AUTHENTICATED: {authenticated}")
-        
+                
         if authenticated == False:
             resp.status = falcon.HTTP_401
             resp.complete = True

@@ -44,8 +44,6 @@ class Auth:
 
         for scheme in self._config.schemes:
             header_names = self._config.headers.get(str(scheme)) or []
-            logger.error(f"HEADERS: {req.headers}")
-            logger.error(f"HEADERS: {header_names}")
             for header_name in header_names:
                 credential_value = req.get_header(header_name, None)
                 if credential_value:
@@ -127,9 +125,7 @@ class Auth:
         return True
 
     async def verify(self, req: Request, auth: bool):
-        context = self._context(req)
-        logger.error(context)
-        
+        context = self._context(req)        
         if auth == True and isinstance(context.user, Anonymous):
             return False
 
@@ -139,7 +135,6 @@ class Auth:
         async def wrapped_hook(req: "falcon.Request", resp: "falcon.Response", *args):
             verified = await self.verify(req, auth)
             if not verified:
-                logger.error("REJECTED FROM HOOK")
                 resp.status = falcon.HTTP_401
                 resp.complete = True
                 raise falcon.HTTPError(falcon.HTTP_401)
