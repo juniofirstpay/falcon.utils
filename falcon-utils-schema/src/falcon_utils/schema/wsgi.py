@@ -2,7 +2,7 @@ from typing import Callable, Union
 from marshmallow import Schema
 from marshmallow_dataclass import dataclass
 
-__all__ = ("map_data", "map_query")
+__all__ = ("map_data", "map_query", "map_response")
 
 def map_data(schema: Union[Schema]) -> Callable:
     def hook(req, resp, resource, params):
@@ -11,6 +11,15 @@ def map_data(schema: Union[Schema]) -> Callable:
             req.context.data = schema.Schema().load(**req.media)
         else:
             req.context.data = schema(**req.media)
+    return hook
+
+def map_response(schema: Union[Schema]) -> Callable:
+    def hook(req, resp, resource, params):
+        if hasattr(schema, 'Schema'):
+            # provided schema is a marshmallow dataclass
+            resp.media = schema.Schema().load(**req.media)
+        else:
+            resp.media = schema(**req.media)
     return hook
 
 def map_query(schema: Union[Schema]) -> Callable:

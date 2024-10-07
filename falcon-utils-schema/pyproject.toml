@@ -8,7 +8,7 @@ include = ["falcon_utils.schema"]
 
 [project]
 name = "falcon-utils-schema"
-version = "0.0.6"
+version = "0.0.7"
 authors = [
   { name="Nirbhay Gupta", email="nirbhay.gupta@junio.in" },
 ]
