@@ -13,17 +13,22 @@ ErrorCode = collections.namedtuple("ErrorCode", ["code", "category", "message"])
 
 class Error(Exception):
     
-    def __init__(self, code: ErrorCode, extras=None):
+    def __init__(self, code: ErrorCode, extras=None, http_status=500):
         self.__code = code
         self.__extras = extras
+        self.__http_status = http_status
         super(Error, self).__init__(self.__code.message)
-
+    
+    @property
+    def http_status(self):
+        return self.__http_status
+    
     def to_dict(self):
         return {
             'code': self.__code.code,
             'category': self.__code.category,
             'message': self.__code.message,
-            'extras': self.__extras
+            'extras': self.__extras,
         }
     
     def to_json(self) -> str:
@@ -46,6 +51,10 @@ class ErrorRegistry(dict):
 def add_error_handler(app: typing.Union["falcon.asgi.App", "falcon.App"], asgi=False):
     if asgi == True:
         async def handler(req, resp, ex: Error, params, **kwargs):
+            
+            if resp.status is None or resp.status < 300: 
+                resp.status = ex.http_status
+            
             resp.media = {
                 'status': None,
                 'data': None,
@@ -53,6 +62,9 @@ def add_error_handler(app: typing.Union["falcon.asgi.App", "falcon.App"], asgi=F
             }
     else:
         def handler(req, resp, ex: Error, params, **kwargs):
+            if resp.status is None or resp.status < 300:
+                resp.status = ex.http_status
+
             resp.media = {
                 'status': None,
                 'data': None,
