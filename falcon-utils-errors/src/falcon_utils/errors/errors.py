@@ -27,7 +27,7 @@ class Error(Exception):
         return {
             'code': self.__code.code,
             'category': self.__code.category,
-            'message': self.__code.message,
+            'description': self.__code.message,
             'extras': self.__extras,
         }
     
