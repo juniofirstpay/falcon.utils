@@ -1,3 +1,5 @@
+import falcon
+import falcon.asgi
 import typing
 import json
 import collections
@@ -13,10 +15,10 @@ ErrorCode = collections.namedtuple("ErrorCode", ["code", "category", "message"])
 
 class Error(Exception):
     
-    def __init__(self, code: ErrorCode, extras=None, http_status=500):
+    def __init__(self, code: ErrorCode, extras=None, status: falcon.HTTPStatus = falcon.HTTP_500):
         self.__code = code
         self.__extras = extras
-        self.__http_status = http_status
+        self.__http_status = status
         super(Error, self).__init__(self.__code.message)
     
     @property
@@ -50,21 +52,16 @@ class ErrorRegistry(dict):
     
 def add_error_handler(app: typing.Union["falcon.asgi.App", "falcon.App"], asgi=False):
     if asgi == True:
-        async def handler(req, resp, ex: Error, params, **kwargs):
-            
-            if resp.status_code is None or resp.status_code < 300: 
-                resp.status_code = ex.http_status
-            
+        async def handler(req: falcon.asgi.Request, resp: falcon.asgi.Response, ex: Error, params, **kwargs):
+            resp.status = ex.http_status
             resp.media = {
                 'status': None,
                 'data': None,
                 'error': ex.to_dict()
             }
     else:
-        def handler(req, resp, ex: Error, params, **kwargs):
-            if resp.status_code is None or resp.status_code < 300:
-                resp.status_code = ex.http_status
-
+        def handler(req: falcon.Request, resp: falcon.Response, ex: Error, params, **kwargs):
+            resp.status = ex.http_status
             resp.media = {
                 'status': None,
                 'data': None,
