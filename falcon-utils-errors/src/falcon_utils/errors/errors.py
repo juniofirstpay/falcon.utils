@@ -52,8 +52,8 @@ def add_error_handler(app: typing.Union["falcon.asgi.App", "falcon.App"], asgi=F
     if asgi == True:
         async def handler(req, resp, ex: Error, params, **kwargs):
             
-            if resp.status is None or resp.status < 300: 
-                resp.status = ex.http_status
+            if resp.status_code is None or resp.status_code < 300: 
+                resp.status_code = ex.http_status
             
             resp.media = {
                 'status': None,
@@ -62,8 +62,8 @@ def add_error_handler(app: typing.Union["falcon.asgi.App", "falcon.App"], asgi=F
             }
     else:
         def handler(req, resp, ex: Error, params, **kwargs):
-            if resp.status is None or resp.status < 300:
-                resp.status = ex.http_status
+            if resp.status_code is None or resp.status_code < 300:
+                resp.status_code = ex.http_status
 
             resp.media = {
                 'status': None,
