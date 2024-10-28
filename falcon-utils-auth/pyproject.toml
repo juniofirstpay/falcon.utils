@@ -8,7 +8,7 @@ include = ["falcon_utils.auth", "falcon_utils.auth.asgi", "falcon_utils.auth.wsg
 
 [project]
 name = "falcon-utils-auth"
-version = "0.0.22"
+version = "0.0.23"
 authors = [
   { name="Nirbhay Gupta", email="nirbhay.gupta@junio.in" },
 ]

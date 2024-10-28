@@ -89,16 +89,20 @@ class Auth:
         pass
 
     async def _authenticate_with_jwt(self, req: Request, context: RequestAuthContext):
-        payload = self._jwt_auth.validate(context.credentials.value)
-        context.user = User(
-            authenticated=True,
-            type=UserType.service,
-            ref=payload["user_id"],
-            domain=context.user.domain,
-            extras={
-                **payload
-            },
-        )
+        try:
+            payload = self._jwt_auth.validate(context.credentials.value)
+            context.user = User(
+                authenticated=True,
+                type=UserType.service,
+                ref=payload["user_id"],
+                domain=context.user.domain,
+                extras={
+                    **payload
+                },
+            )
+        except Exception as e:
+            logger.error(e)
+            raise falcon.HTTPError(falcon.HTTP_401)
 
     async def validate(self, req: Request):
         context = self._context(req)
