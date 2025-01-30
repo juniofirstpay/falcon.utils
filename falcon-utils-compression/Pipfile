@@ -5,11 +5,13 @@ name = "pypi"
 
 [packages]
 brotlipy = "*"
+brotli = "*"
 
 [dev-packages]
 falcon = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 pytest = "*"
+build = "*"
 
 [requires]
 python_version = "3.11"

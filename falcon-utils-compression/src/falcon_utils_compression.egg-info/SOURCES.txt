@@ -1,0 +1,9 @@
+pyproject.toml
+src/falcon_utils/compression/__init__.py
+src/falcon_utils/compression/middleware.py
+src/falcon_utils_compression.egg-info/PKG-INFO
+src/falcon_utils_compression.egg-info/SOURCES.txt
+src/falcon_utils_compression.egg-info/dependency_links.txt
+src/falcon_utils_compression.egg-info/requires.txt
+src/falcon_utils_compression.egg-info/top_level.txt
+tests/test_compression.py

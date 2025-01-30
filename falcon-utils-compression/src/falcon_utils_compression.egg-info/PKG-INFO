@@ -1,5 +1,5 @@
-Metadata-Version: 2.1
-Name: falcon-utils-errors
+Metadata-Version: 2.2
+Name: falcon-utils-compression
 Version: 0.0.5
 Summary: Falcon Contribution project
 Author-email: Nirbhay Gupta <nirbhay.gupta@junio.in>
@@ -8,3 +8,4 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
+Requires-Dist: brotli

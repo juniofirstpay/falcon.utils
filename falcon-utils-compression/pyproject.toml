@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src/"]
-include = ["falcon_utils.errors"]
+include = ["falcon_utils.compression"]
 
 [project]
-name = "falcon-utils-errors"
+name = "falcon-utils-compression"
 version = "0.0.5"
 authors = [
   { name="Nirbhay Gupta", email="nirbhay.gupta@junio.in" },
@@ -19,4 +19,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+]
+dependencies = [
+  "brotli"
 ]
