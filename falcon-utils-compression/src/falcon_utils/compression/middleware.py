@@ -11,7 +11,7 @@ class Middleware:
     async def compress(self, data: bytes):
         return brotli.compress(
             data,
-            mode=brotli.BrotliEncoderMode.TEXT,
+            mode=brotli.MODE_TEXT,
             quality=self._compression_quality,
         )
 
