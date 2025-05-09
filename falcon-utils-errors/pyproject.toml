@@ -8,7 +8,7 @@ include = ["falcon_utils.errors"]
 
 [project]
 name = "falcon-utils-errors"
-version = "0.0.5"
+version = "0.0.6"
 authors = [
   { name="Nirbhay Gupta", email="nirbhay.gupta@junio.in" },
 ]

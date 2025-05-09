@@ -69,3 +69,15 @@ def add_error_handler(app: typing.Union["falcon.asgi.App", "falcon.App"], asgi=F
             }
         
     app.add_error_handler(Error, handler)
+
+def add_error_handler_v2(app: typing.Union["falcon.asgi.App", "falcon.App"], asgi=False):
+    if asgi == True:
+        async def handler(req: falcon.asgi.Request, resp: falcon.asgi.Response, ex: Error, params, **kwargs):
+            resp.status = ex.http_status
+            resp.media = ex.to_dict()
+    else:
+        def handler(req: falcon.Request, resp: falcon.Response, ex: Error, params, **kwargs):
+            resp.status = ex.http_status
+            resp.media = ex.to_dict()
+        
+    app.add_error_handler(Error, handler)
