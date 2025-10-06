@@ -4,17 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-casbin = "*"
-pyjwt = "*"
 cryptography = "*"
+pyjwt = "*"
+casbin = "*"
+aiohttp = "*"
+requests = "*"
+structlog = "*"
 
 [dev-packages]
-ipython = "*"
 falcon = "*"
-pytest = "*"
-black = "*"
 build = "*"
+black = "*"
 
 [requires]
-python_version = "3.9"
-python_full_version = "3.9.10"
+python_version = "3.11"
+python_full_version = "3.11.12"
