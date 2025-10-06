@@ -4,31 +4,37 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src/"]
-include = ["falcon_utils.auth", "falcon_utils.auth.asgi", "falcon_utils.auth.wsgi", "falcon_utils.auth.shared", "falcon_utils.auth.casbin"]
+include = [
+  "falcon_utils.auth",
+  "falcon_utils.auth.asgi",
+  "falcon_utils.auth.wsgi",
+  "falcon_utils.auth.shared",
+  "falcon_utils.auth.casbin",
+  "falcon_utils.auth_v2",
+  "falcon_utils.auth_v2.authenticators",
+]
 
 [project]
 name = "falcon-utils-auth"
-version = "0.0.23"
-authors = [
-  { name="Nirbhay Gupta", email="nirbhay.gupta@junio.in" },
-]
+version = "0.0.26"
+authors = [{ name = "Nirbhay Gupta", email = "nirbhay.gupta@junio.in" }]
 description = "Falcon Contribution project"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
 ]
-dependencies=[
+dependencies = [
   "casbin >= 1.36.3",
   "cryptography ~= 43.0",
-  "pyjwt ~= 2.9"
+  "pyjwt >= 2.9",
+  "requests",
+  "structlog",
 ]
 
 
 [tool.pytest.ini_options]
 addopts = "-rSA"
-testpaths = [
-  "tests"
-]
+testpaths = ["tests"]

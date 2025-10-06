@@ -1,13 +1,15 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: falcon-utils-auth
-Version: 0.0.23
+Version: 0.0.26
 Summary: Falcon Contribution project
 Author-email: Nirbhay Gupta <nirbhay.gupta@junio.in>
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
-Requires-Python: >=3.8
+Requires-Python: >=3.11
 Description-Content-Type: text/markdown
 Requires-Dist: casbin>=1.36.3
 Requires-Dist: cryptography~=43.0
-Requires-Dist: pyjwt~=2.9
+Requires-Dist: pyjwt>=2.9
+Requires-Dist: requests
+Requires-Dist: structlog

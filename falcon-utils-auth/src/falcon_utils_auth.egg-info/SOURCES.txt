@@ -17,6 +17,12 @@ src/falcon_utils/auth/shared/user.py
 src/falcon_utils/auth/wsgi/__init__.py
 src/falcon_utils/auth/wsgi/auth.py
 src/falcon_utils/auth/wsgi/middleware.py
+src/falcon_utils/auth_v2/__init__.py
+src/falcon_utils/auth_v2/authentication.py
+src/falcon_utils/auth_v2/user.py
+src/falcon_utils/auth_v2/authenticators/__init__.py
+src/falcon_utils/auth_v2/authenticators/api_key_authenticator.py
+src/falcon_utils/auth_v2/authenticators/jwt_authenticator.py
 src/falcon_utils_auth.egg-info/PKG-INFO
 src/falcon_utils_auth.egg-info/SOURCES.txt
 src/falcon_utils_auth.egg-info/dependency_links.txt
