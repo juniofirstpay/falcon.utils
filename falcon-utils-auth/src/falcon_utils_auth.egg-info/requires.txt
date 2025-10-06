@@ -1,3 +1,5 @@
 casbin>=1.36.3
 cryptography~=43.0
-pyjwt~=2.9
+pyjwt>=2.9
+requests
+structlog
