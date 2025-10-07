@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 marshmallow-dataclass = "==8.7.0"
+pydantic = "*"
+falcon = "*"
+unflatten = "*"
+build = "*"
 
 [dev-packages]
 build = "*"
