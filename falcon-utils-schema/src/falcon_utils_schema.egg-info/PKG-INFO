@@ -1,6 +1,6 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: falcon-utils-schema
-Version: 0.0.7
+Version: 0.0.8
 Summary: Falcon Contribution project
 Author-email: Nirbhay Gupta <nirbhay.gupta@junio.in>
 Classifier: Programming Language :: Python :: 3
@@ -8,4 +8,3 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
-Requires-Dist: marshmallow_dataclass==8.7.0
