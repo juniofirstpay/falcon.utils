@@ -30,6 +30,7 @@ class APIKeyAuthenticator:
                     type="service-account",
                     **service_account
                 )
+                return True
             except Exception as e:
                 await logger.aerror(e)
                 return False
