@@ -4,22 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src/"]
-include = ["falcon_utils.schema"]
+include = ["falcon_utils.schema", "falcon_utils.v2", "falcon_utils.v2.schema"]
 
 [project]
 name = "falcon-utils-schema"
-version = "0.0.7"
-authors = [
-  { name="Nirbhay Gupta", email="nirbhay.gupta@junio.in" },
-]
+version = "0.0.8"
+authors = [{ name = "Nirbhay Gupta", email = "nirbhay.gupta@junio.in" }]
 description = "Falcon Contribution project"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
 ]
-dependencies = [
-  "marshmallow_dataclass==8.7.0"
-]
+dependencies = []
