@@ -16,7 +16,7 @@ include = [
 
 [project]
 name = "falcon-utils-auth"
-version = "0.0.27"
+version = "0.0.28"
 authors = [{ name = "Nirbhay Gupta", email = "nirbhay.gupta@junio.in" }]
 description = "Falcon Contribution project"
 readme = "README.md"
