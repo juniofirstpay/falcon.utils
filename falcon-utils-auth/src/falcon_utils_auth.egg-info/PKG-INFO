@@ -9,7 +9,7 @@ Classifier: Operating System :: OS Independent
 Requires-Python: >=3.11
 Description-Content-Type: text/markdown
 Requires-Dist: casbin>=1.36.3
-Requires-Dist: cryptography~=43.0
+Requires-Dist: cryptography>=43.0.0
 Requires-Dist: pyjwt>=2.9
 Requires-Dist: requests
 Requires-Dist: structlog
