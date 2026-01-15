@@ -22,17 +22,18 @@ class APIKeyAuthenticator:
     ):
         api_key = req.get_header(self.__header_name)
 
-        if api_key:
-            try:
-                service_account = self.__api_keys[api_key]
-                req.context.user = user_cls(
-                    id=service_account["name"],
-                    type="service-account",
-                    **service_account
-                )
-                return True
-            except Exception as e:
-                await logger.aerror(e)
+        if not api_key:
+            return False
+
+        try:
+            if not api_key in self.__api_keys:
                 return False
-        else:
+
+            service_account = self.__api_keys[api_key]
+            req.context.user = user_cls(
+                id=service_account["name"], type="service-account", **service_account
+            )
+            return True
+        except Exception as e:
+            await logger.aerror(e)
             return False

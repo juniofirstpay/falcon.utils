@@ -42,7 +42,7 @@ class Authentication:
 
         authenticated = False
         for auth_scheme in allowed_auth_schemes:
-            if authenticator := self.__authenticators.get(auth_scheme):
+            if (authenticator := self.__authenticators.get(auth_scheme)) is None:
                 break
 
             await logger.adebug("authenticating request with %s", auth_scheme)
