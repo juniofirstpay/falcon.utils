@@ -65,6 +65,13 @@ class Auth:
 
     def _context(self, req: Request) -> RequestAuthContext:
         return req.context.auth
+    
+    async def get_error_status_mapping(self, error: str):
+        from jwt.exceptions import ExpiredSignatureError
+        if isinstance(error, ExpiredSignatureError):
+            return falcon.HTTP_403
+        
+        return falcon.HTTP_401
 
     async def _authenticate_with_api_key(
         self, req: Request, context: RequestAuthContext
@@ -102,7 +109,8 @@ class Auth:
             )
         except Exception as e:
             logger.error(e)
-            raise falcon.HTTPError(falcon.HTTP_401)
+            get_error_status_code = await self.get_error_status_mapping(e)
+            raise falcon.HTTPError(get_error_status_code)
 
     async def validate(self, req: Request):
         context = self._context(req)
