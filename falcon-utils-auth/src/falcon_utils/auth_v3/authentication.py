@@ -38,7 +38,7 @@ class Authentication:
         **kwargs,
     ):
         if not allowed_auth_schemes:
-            return
+            raise falcon.HTTPError(falcon.HTTP_401)
 
         authenticated = False
         for auth_scheme in allowed_auth_schemes:
